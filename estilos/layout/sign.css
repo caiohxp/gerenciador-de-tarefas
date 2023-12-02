@@ -1,0 +1,53 @@
+@import url('../colors.css');
+
+body{
+    background-color: var(--bg);
+    color: var(--text-white);
+}
+
+section{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    
+}
+form > div{
+    margin: 10px 0;
+}
+.form-button{
+    background-color: var(--bg-lightgreen);
+    color: var(--text-white);
+}
+.form-field{
+    border: solid 2px var(--bg-darkgreen);
+    background-color: var(--baby-blue);
+    color: var(--bg);
+    padding-left: 70px;
+}
+.textbox{
+    position: relative;
+    padding-left: 20px;
+}
+.textbox input:focus, .textbox input:valid{
+    padding-left: 20px;
+}
+.textbox input:focus ~ label, .textbox input:valid ~ label{
+    translate: -34px 0;
+    scale: 0.825;
+    transition-duration: 0.3s;
+}
+.form-field + label{
+    position: absolute;
+    display: grid;
+    place-items: center;
+    transform-origin: 0% 0%;
+    pointer-events: none;
+    top: 0px;
+    left: 0px;
+    height: 32px;
+    width: 80px;
+    border-radius: 27px;
+    background: var(--bg-darkgreen);
+    z-index: 1000;
+}
