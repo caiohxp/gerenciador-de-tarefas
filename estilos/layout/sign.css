@@ -5,7 +5,7 @@ body{
     color: var(--text-white);
 }
 
-section{
+.sign-section{
     position: absolute;
     top: 50%;
     left: 50%;
