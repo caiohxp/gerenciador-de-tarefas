@@ -1,0 +1,18 @@
+.form-field-manager{
+    border: solid 2px var(--bg-darkgreen);
+    background-color: var(--bg-lightgreen);
+    color: var(--text-white);
+}
+.manager-header{
+    border: solid 2px var(--white);
+    background-color: var(--bg-darkgreen);
+}
+th, td{
+    border: solid 1px var(--text-white);
+}
+
+.logoff:hover{
+    cursor: pointer;
+    background-color: var(--bg);
+    transition: 0.3s;
+}

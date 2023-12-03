@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Tarefas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="manager-header d-flex justify-content-evenly align-items-center">
+        <h2 class="header-title"></h2>
+        <div onclick="logoff()" class="logoff p-1 rounded">
+            <h4>Sair</h4>
+        </div>
+    </header>
+    <section class="manager-section d-flex justify-content-center align-items-center flex-column">
+        <h1 class="title">Gerenciador de Tarefas</h1>
+        <form onsubmit="makeTask()" class="row w-50">
+            <div class="textbox col-md-12">
+                <input id="task" class="w-100 rounded form-field-manager" type="text" placeholder="Tarefas">
+            </div>
+            <div class="textbox col-md-6">
+                <input id="initial-date" class="w-100 rounded form-field-manager" type="date">
+            </div>
+            <div class="textbox col-md-6">
+                <input id="initial-hour" class="w-100 rounded form-field-manager" type="time" placeholder="Hora">
+            </div>
+            <div class="textbox col-md-6">
+                <input id="finish-date" class="w-100 rounded form-field-manager" type="date">
+            </div>
+            <div class="textbox col-md-6">
+                <input id="finish-hour" class="w-100 rounded form-field-manager" type="time">
+            </div>
+            <div class="textbox col-md-12">
+                <textarea id="description" class="rounded form-field-manager w-100" name="" id="" cols="30" rows="10"
+                    placeholder="Descrição"></textarea>
+            </div>
+            <div class="textbox col-md-12">
+                <button class="form-button p-1 rounded" type="submit">Criar tarefa</button>
+            </div>
+        </form>
+    </section>
+    <section class="table-tasks d-flex justify-content-center align-items-center">
+        <table class="w-100 m-5">
+            <thead>
+                <tr>
+                    <th>Tarefa</th>
+                    <th>Início</th>
+                    <th>Término</th>
+                    <th>Status</th>
+                    <th>Alterar</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+        <script src="scripts/manager.js"></script>
+</body>
+
+</html>
