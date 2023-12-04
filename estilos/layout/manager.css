@@ -1,7 +1,7 @@
 .form-field-manager{
     border: solid 2px var(--bg-darkgreen);
-    background-color: var(--bg-lightgreen);
-    color: var(--text-white);
+    background-color: var(--baby-blue);
+    color: var(--bg);
 }
 .manager-header{
     border: solid 2px var(--white);

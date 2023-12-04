@@ -1,10 +1,80 @@
-function logoff(){
+function logoff() {
     window.location.href = 'index.html';
     localStorage.removeItem("user");
     alert("Boa noite!");
 }
 
-function makeTask(){
+// function makeTask(){
+//     const dataTask = {
+//         task: document.querySelector("#task").value,
+//         initialDate: document.querySelector("#initial-date").value,
+//         initialHour: document.querySelector("#initial-hour").value,
+//         finishDate: document.querySelector("#finish-date").value,
+//         finishHour: document.querySelector("#finish-hour").value,
+//         description: document.querySelector("#description").value,
+//     }
+
+//     let tasks = localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks")) : [];
+
+//     tasks.push(dataTask);
+//     localStorage.setItem("tasks", JSON.stringify(tasks));
+// }
+
+// const headerTitle = document.querySelector('.header-title');
+// headerTitle.innerText = `Bem Vindo, ${JSON.parse(localStorage.getItem("user")).name}`;
+
+// if(localStorage.getItem("tasks")){
+//     let tasks = JSON.parse(localStorage.getItem("tasks"));
+//     const tbody = document.querySelector("tbody");
+//     tasks.forEach(t => {
+//         const tr = document.createElement('tr');
+//         // tr.innerHTML = `
+//         // <td onclick="${infoModal(t)}" class="td-task p-2" data-bs-toggle="modal" data-bs-target="#info-task-modal">${t.task}</td>
+//         // <td>${formatData(t.initialDate)} às ${t.initialHour}</td>
+//         // <td>${formatData(t.finishDate)} às ${t.finishHour}</td>
+//         // <td>${taskStatus(t)}</td>
+//         // <td>
+//         //     <button onclick="${changeModal(t)}" id="task-${i}" class="btn btn-warning p-1 rounded" data-bs-target="#change-task-modal" data-bs-toggle="modal">
+//         //         Alterar
+//         //     </button>
+//         // </td>
+//         // `;
+//         const tdtask = document.createElement('td');
+//         const tdinitial = document.createElement('td');
+//         const tdfinish = document.createElement('td');
+//         var tdstatus = document.createElement('td');
+//         const tdchange = document.createElement('td');
+
+//         tdinitial.innerText = `${formatData(t.initialDate)} às ${t.initialHour}`;
+//         tdfinish.innerText = `${formatData(t.finishDate)} às ${t.finishHour}`;
+//         tdtask.innerText = `${t.task}`;
+//         tdtask.setAttribute("data-bs-toggle", "modal");
+//         tdtask.setAttribute('data-bs-target', '#info-task-modal');
+//         tdtask.classList.add('td-task', 'p-2');
+//         tdtask.addEventListener('click', infoModal(t));
+//         tdstatus = taskStatus(t); 
+//         const btnchange = document.createElement('button');
+//         btnchange.innerText = 'Alterar';
+//         btnchange.classList.add('btn','btn-warning','p-1', 'rounded');
+//         btnchange.setAttribute("data-bs-toggle", "modal");
+//         btnchange.setAttribute('data-bs-target', '#change-task-modal');
+//         btnchange.setAttribute('data-task', t.task);
+//         btnchange.setAttribute('id', `task-${i}`);
+//         btnchange.classList.add('change-task-tbutton');
+//         btnchange.addEventListener('click', () => changeModal(t));
+//         console.log(t.task);
+//         tdchange.appendChild(btnchange);
+//         tr.appendChild(tdtask);
+//         tr.appendChild(tdinitial);
+//         tr.appendChild(tdfinish);
+//         tr.appendChild(tdstatus);
+//         tr.appendChild(tdchange);
+
+//         tbody.appendChild(tr);
+//     });
+// }
+
+function makeTask() {
     const dataTask = {
         task: document.querySelector("#task").value,
         initialDate: document.querySelector("#initial-date").value,
@@ -12,6 +82,7 @@ function makeTask(){
         finishDate: document.querySelector("#finish-date").value,
         finishHour: document.querySelector("#finish-hour").value,
         description: document.querySelector("#description").value,
+        status: false
     }
 
     let tasks = localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks")) : [];
@@ -23,32 +94,50 @@ function makeTask(){
 const headerTitle = document.querySelector('.header-title');
 headerTitle.innerText = `Bem Vindo, ${JSON.parse(localStorage.getItem("user")).name}`;
 
-if(localStorage.getItem("tasks")){
+
+if (localStorage.getItem("tasks")) {
     let tasks = JSON.parse(localStorage.getItem("tasks"));
     const tbody = document.querySelector("tbody");
-    tasks.forEach(t => {
+
+    tasks.forEach((t) => {
         const tr = document.createElement('tr');
+        // tr.innerHTML = `
+        // <td onclick="${infoModal(t)}" class="td-task p-2" data-bs-toggle="modal" data-bs-target="#info-task-modal">${t.task}</td>
+        // <td>${formatData(t.initialDate)} às ${t.initialHour}</td>
+        // <td>${formatData(t.finishDate)} às ${t.finishHour}</td>
+        // <td>${taskStatus(t)}</td>
+        // <td>
+        //     <button onclick="${changeModal(t)}" id="task-${i}" class="btn btn-warning p-1 rounded" data-task="${t.task}" data-bs-target="#change-task-modal" data-bs-toggle="modal">
+        //         Alterar
+        //     </button>
+        // </td>
+        // `;
         const tdtask = document.createElement('td');
         const tdinitial = document.createElement('td');
         const tdfinish = document.createElement('td');
         var tdstatus = document.createElement('td');
         const tdchange = document.createElement('td');
-        const btnchange = document.createElement('button');
-        
+
         tdinitial.innerText = `${formatData(t.initialDate)} às ${t.initialHour}`;
         tdfinish.innerText = `${formatData(t.finishDate)} às ${t.finishHour}`;
         tdtask.innerText = `${t.task}`;
         tdtask.setAttribute("data-bs-toggle", "modal");
         tdtask.setAttribute('data-bs-target', '#info-task-modal');
-        tdtask.classList.add('td-task');
-        tdtask.classList.add('p-2');
-        tdstatus = taskStatus(tdstatus, t.initialDate, t.initialHour, t.finishDate, t.finishHour); 
+        tdtask.classList.add('td-task', 'p-2');
+        tdtask.addEventListener('click', () => infoModal(t));
+        tdstatus = taskStatus(t);
+
+        const btnchange = document.createElement('button');
         btnchange.innerText = 'Alterar';
-        btnchange.classList.add('btn','btn-warning','p-1', 'rounded');
+        btnchange.classList.add('btn', 'btn-warning', 'p-1', 'rounded', '#teste');
         btnchange.setAttribute("data-bs-toggle", "modal");
         btnchange.setAttribute('data-bs-target', '#change-task-modal');
-        btnchange.addEventListener("click", changeModal(t));
+        btnchange.setAttribute('data-task', t.task);
+        btnchange.id = `${t.task}`;
+        btnchange.addEventListener('click', () => changeModal(t));
+
         tdchange.appendChild(btnchange);
+
         tr.appendChild(tdtask);
         tr.appendChild(tdinitial);
         tr.appendChild(tdfinish);
@@ -56,32 +145,24 @@ if(localStorage.getItem("tasks")){
         tr.appendChild(tdchange);
 
         tbody.appendChild(tr);
+        
     });
 }
 
-function changeModal(task){
-    let name = document.querySelector('#nametask');
-    let di = document.querySelector('#di');
-    let hi = document.querySelector('#hi');
-    let dt = document.querySelector('#dt');
-    let ht = document.querySelector('#ht');
-
-    // Limpar conteúdo anterior
-    name.textContent = "";
-    di.textContent = "";
-    hi.textContent = "";
-    dt.textContent = "";
-    ht.textContent = "";
-
-    // Configurar novos valores
-    name.textContent = task.task;
-    di.textContent = formatData(task.initialDate);
-    hi.textContent = task.initialHour;
-    dt.textContent = formatData(task.finishDate);
-    ht.textContent = task.finishHour;
+function infoModal(task) {
+    document.querySelector('#title-modal').innerHTML = `${task.task}`;
+    document.querySelector('#description-modal').innerHTML = `${task.description}`;
 }
 
-function formatData(date){
+function changeModal(task) {
+    document.querySelector('#nametask').value = task.task;
+    document.querySelector('#di').value = task.initialDate;
+    document.querySelector('#hi').value = task.initialHour;
+    document.querySelector('#dt').value = task.finishDate;
+    document.querySelector('#ht').value = task.finishHour;
+}
+
+function formatData(date) {
     var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
     var formatoData = new Intl.DateTimeFormat('pt-BR', options);
 
@@ -89,29 +170,41 @@ function formatData(date){
     return dataFormatada;
 }
 
-function taskStatus(tdstatus, initialDate, initialHour, finishDate, finishHour){
+function taskStatus(task) {
+    const tdstatus = document.createElement('td');
     const status = {
         ATRASO: 'Em atraso',
         PENDENTE: 'Pendente',
         ANDAMENTO: 'Em andamento',
         REALIZADA: 'Realizada'
     }
+    const start = new Date(`${task.initialDate}T${task.initialHour}:00`).getTime();
+    const finish = new Date(`${task.finishDate}T${task.finishHour}:00`).getTime();
+    const now = new Date().getTime();
+    if(!task.status){
+        if (finish < now) {
+            tdstatus.innerHTML = status.ATRASO;
+            tdstatus.setAttribute("style", "color: red");
+        }
+        else if (start < now && now < finish) {
+            tdstatus.innerHTML = status.ANDAMENTO;
+            tdstatus.setAttribute("style", "color: blue");
+        }
+        else if (now < start) {
+            tdstatus.innerHTML = status.PENDENTE;
+            tdstatus.setAttribute("style", "color: yellow");
+        } else tdstatus.innerHTML = status.REALIZADA;
+    } else return status.REALIZADA;
+
+    return tdstatus;
+}
+
+function checkDate(initialDate, initialHour, finishDate, finishHour) {
     const start = new Date(`${initialDate}T${initialHour}:00`).getTime();
     const finish = new Date(`${finishDate}T${finishHour}:00`).getTime();
     const now = new Date().getTime();
 
-    if(finish < now) {
-        tdstatus.innerText = status.ATRASO;
-        tdstatus.setAttribute("style", "color: red");
-    } 
-    else if(start < now && now < finish) {
-        tdstatus.innerText = status.ANDAMENTO;
-        tdstatus.setAttribute("style", "color: blue");
-    } 
-    else if(now < start) {
-        tdstatus.innerText = status.PENDENTE;
-        tdstatus.setAttribute("style", "color: yellow");
-    } 
-
-    return tdstatus;
+    if (finish < start) return false;
+    else return true;
 }
+
