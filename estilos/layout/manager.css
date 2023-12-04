@@ -7,12 +7,15 @@
     border: solid 2px var(--white);
     background-color: var(--bg-darkgreen);
 }
-th, td{
-    border: solid 1px var(--text-white);
-}
-
 .logoff:hover{
     cursor: pointer;
     background-color: var(--bg);
     transition: 0.3s;
+}
+table{
+    background-color: #000;
+}
+.td-task:hover{
+    background-color: var(--bg-darkgreen);
+    cursor: pointer;
 }
