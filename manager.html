@@ -21,13 +21,15 @@
         <h1 class="title">Gerenciador de Tarefas</h1>
         <form onsubmit="makeTask()" class="row w-50">
             <div class="textbox col-md-12">
-                <input id="task" class="w-100 rounded form-field-manager p-2" type="text" placeholder="Tarefas" required>
+                <input id="task" class="w-100 rounded form-field-manager p-2" type="text" placeholder="Tarefas"
+                    required>
             </div>
             <div class="textbox col-md-6">
                 <input id="initial-date" class="w-100 rounded form-field-manager p-2" type="date" required>
             </div>
             <div class="textbox col-md-6">
-                <input id="initial-hour" class="w-100 rounded form-field-manager p-2" type="time" placeholder="Hora" required>
+                <input id="initial-hour" class="w-100 rounded form-field-manager p-2" type="time" placeholder="Hora"
+                    required>
             </div>
             <div class="textbox col-md-6">
                 <input id="finish-date" class="w-100 rounded form-field-manager p-2" type="date" required>
@@ -36,8 +38,8 @@
                 <input id="finish-hour" class="w-100 rounded form-field-manager p-2" type="time" required>
             </div>
             <div class="textbox col-md-12">
-                <textarea id="description" class="rounded form-field-manager p-2 w-100" name="" id="" cols="30" rows="10"
-                    placeholder="Descrição"></textarea>
+                <textarea id="description" class="rounded form-field-manager p-2 w-100" name="" id="" cols="30"
+                    rows="10" placeholder="Descrição"></textarea>
             </div>
             <div class="textbox col-md-12">
                 <button class="form-button p-1 rounded" type="submit">Criar tarefa</button>
@@ -62,56 +64,63 @@
                 <div class="modal-content bg-dark">
                     <div class="modal-head d-flex justify-content-between ms-2 mt-1">
                         <div class="d-flex overflow-y-auto text-break">
-                          <h1 class="modal-title fs-5" id="title-modal"></h1>
+                            <h1 class="modal-title fs-5" id="title-modal"></h1>
                         </div>
                         <div class="me-2 mt-1">
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                      </div>
-                      <div class="modal-body">
+                    </div>
+                    <div class="modal-body">
                         <div class="mb-3">
-                          <label for="message-text" class="col-form-label">Descrição:</label>
-                          <textarea class="form-control" id="description-modal" disabled></textarea>
+                            <label for="message-text" class="col-form-label">Descrição:</label>
+                            <textarea class="form-control" id="description-modal" disabled></textarea>
                         </div>
-          
-                      </div>
-                      <div class="modal-footer">
+
+                    </div>
+                    <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                      </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="modal fade" id="change-task-modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg">
-                <div class="modal-content bg-dark text-center p-5">
-                    <h1>Gerenciador de Tarefas</h1>
-                    <div class="row p-2">
-                        <div class="d-flex col-md-12">
-                            <label id="label-task" class="me-2">Tarefa:</label>
-                            <input type="text" class="form-control" id="nametask" required>
-                        </div>
-                        <div class="d-flex col-md-6 w-50">
-                            <label class="me-2">Data de Início:</label>
-                            <input type="date" class="form-control" id="di" required>
-                        </div>
-                        <div class="d-flex col-md-6 w-50">
-                            <label class="me-2">Hora de Início:</label>
-                            <input type="time" class="form-control" id="hi" required>
-                        </div>
-                        <div class="d-flex col-md-6 w-50">
-                            <label class="me-2">Data de Término:</label>
-                            <input type="date" class="form-control" id="dt" required>
-                        </div>
-                        <div class="d-flex col-md-6 w-50">
-                            <label class="me-2">Hora de Término:</label>
-                            <input type="time" class="form-control" id="ht" required>
+                <div class="modal-content bg-dark text-center">
+                    <div class="modal-head d-flex justify-content-end ms-2 mt-1">
+                        <div class="me-2 mt-1">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center pb-4">
-                        <button class="m-2 btn btn-primary" onclick="changeTask()">Alterar Tarefa</button>
-                        <button class="m-2 btn btn-danger" onclick="removeTask()">Excluir Tarefa</button>
-                        <button class="m-2 btn btn-success" onclick="changeStatus()">Marcar como realizada</button>
-                        <button class="m-2 btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <div class="p-4">
+                        <h1>Gerenciador de Tarefas</h1>
+                        <div class="row p-2 d-flex justify-content-center">
+                            <div class="d-flex justify-content-center col-md-12">
+                                <label id="label-task" class="me-2">Tarefa:</label>
+                                <input class="w-75 mb-2 rounded" type="text" class="form-control" id="nametask" required>
+                            </div>
+                            <div class="d-flex justify-content-center col-md-6 w-50">
+                                <label class="me-2">Data de Início:</label>
+                                <input class="w-50 mb-2 rounded" type="date" class="form-control" id="di" required>
+                            </div>
+                            <div class="d-flex justify-content-center col-md-6 w-50">
+                                <label class="me-2">Hora de Início:</label>
+                                <input class="w-50 mb-2 rounded" type="time" class="form-control" id="hi" required>
+                            </div>
+                            <div class="d-flex justify-content-center col-md-6 w-50">
+                                <label class="me-2">Data de Término:</label>
+                                <input class="w-50 mb-2 rounded" type="date" class="form-control" id="dt" required>
+                            </div>
+                            <div class="d-flex justify-content-center col-md-6 w-50">
+                                <label class="me-2">Hora de Término:</label>
+                                <input class="w-50 mb-2 rounded" type="time" class="form-control" id="ht" required>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center pb-4">
+                            <button class="m-2 btn btn-primary" onclick="changeTask()">Alterar Tarefa</button>
+                            <button class="m-2 btn btn-danger" onclick="removeTask()">Excluir Tarefa</button>
+                            <button class="m-2 btn btn-success" onclick="changeStatus()">Marcar como realizada</button>
+                            <button class="m-2 btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,7 +129,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
-        <script src="scripts/manager.js"></script>
+    <script src="scripts/manager.js"></script>
 </body>
 
 </html>

@@ -17,7 +17,7 @@ function makeTask() {
     }
 
     let tasks = localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks")) : [];
-    dataTask.id = tasks.length;
+    dataTask.id = tasks.length + 1;
 
     if (checkDate(dataTask)) {
         tasks.push(dataTask);
