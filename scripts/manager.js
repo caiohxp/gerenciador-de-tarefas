@@ -4,78 +4,9 @@ function logoff() {
     alert("Boa noite!");
 }
 
-// function makeTask(){
-//     const dataTask = {
-//         task: document.querySelector("#task").value,
-//         initialDate: document.querySelector("#initial-date").value,
-//         initialHour: document.querySelector("#initial-hour").value,
-//         finishDate: document.querySelector("#finish-date").value,
-//         finishHour: document.querySelector("#finish-hour").value,
-//         description: document.querySelector("#description").value,
-//     }
-
-//     let tasks = localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks")) : [];
-
-//     tasks.push(dataTask);
-//     localStorage.setItem("tasks", JSON.stringify(tasks));
-// }
-
-// const headerTitle = document.querySelector('.header-title');
-// headerTitle.innerText = `Bem Vindo, ${JSON.parse(localStorage.getItem("user")).name}`;
-
-// if(localStorage.getItem("tasks")){
-//     let tasks = JSON.parse(localStorage.getItem("tasks"));
-//     const tbody = document.querySelector("tbody");
-//     tasks.forEach(t => {
-//         const tr = document.createElement('tr');
-//         // tr.innerHTML = `
-//         // <td onclick="${infoModal(t)}" class="td-task p-2" data-bs-toggle="modal" data-bs-target="#info-task-modal">${t.task}</td>
-//         // <td>${formatData(t.initialDate)} às ${t.initialHour}</td>
-//         // <td>${formatData(t.finishDate)} às ${t.finishHour}</td>
-//         // <td>${taskStatus(t)}</td>
-//         // <td>
-//         //     <button onclick="${changeModal(t)}" id="task-${i}" class="btn btn-warning p-1 rounded" data-bs-target="#change-task-modal" data-bs-toggle="modal">
-//         //         Alterar
-//         //     </button>
-//         // </td>
-//         // `;
-//         const tdtask = document.createElement('td');
-//         const tdinitial = document.createElement('td');
-//         const tdfinish = document.createElement('td');
-//         var tdstatus = document.createElement('td');
-//         const tdchange = document.createElement('td');
-
-//         tdinitial.innerText = `${formatData(t.initialDate)} às ${t.initialHour}`;
-//         tdfinish.innerText = `${formatData(t.finishDate)} às ${t.finishHour}`;
-//         tdtask.innerText = `${t.task}`;
-//         tdtask.setAttribute("data-bs-toggle", "modal");
-//         tdtask.setAttribute('data-bs-target', '#info-task-modal');
-//         tdtask.classList.add('td-task', 'p-2');
-//         tdtask.addEventListener('click', infoModal(t));
-//         tdstatus = taskStatus(t); 
-//         const btnchange = document.createElement('button');
-//         btnchange.innerText = 'Alterar';
-//         btnchange.classList.add('btn','btn-warning','p-1', 'rounded');
-//         btnchange.setAttribute("data-bs-toggle", "modal");
-//         btnchange.setAttribute('data-bs-target', '#change-task-modal');
-//         btnchange.setAttribute('data-task', t.task);
-//         btnchange.setAttribute('id', `task-${i}`);
-//         btnchange.classList.add('change-task-tbutton');
-//         btnchange.addEventListener('click', () => changeModal(t));
-//         console.log(t.task);
-//         tdchange.appendChild(btnchange);
-//         tr.appendChild(tdtask);
-//         tr.appendChild(tdinitial);
-//         tr.appendChild(tdfinish);
-//         tr.appendChild(tdstatus);
-//         tr.appendChild(tdchange);
-
-//         tbody.appendChild(tr);
-//     });
-// }
-
 function makeTask() {
     const dataTask = {
+        id: 0,
         task: document.querySelector("#task").value,
         initialDate: document.querySelector("#initial-date").value,
         initialHour: document.querySelector("#initial-hour").value,
@@ -86,14 +17,62 @@ function makeTask() {
     }
 
     let tasks = localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks")) : [];
+    dataTask.id = tasks.length;
 
-    tasks.push(dataTask);
+    if (checkDate(dataTask)) {
+        tasks.push(dataTask);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    } else alert('Data Inválida');
+}
+
+function changeTask() {
+    const tasks = localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks")) : [];
+    const changedTask = {
+        id: parseInt(document.querySelector('#label-task').innerHTML.split(' ')[1][0]),
+        task: document.querySelector('#nametask').value,
+        initialDate: document.querySelector('#di').value,
+        initialHour: document.querySelector('#hi').value,
+        finishDate: document.querySelector('#dt').value,
+        finishHour: document.querySelector('#ht').value
+    }
+
+    tasks.forEach(t => {
+        if (checkDate(changedTask)) {
+            if (t.id == changedTask.id) {
+                t.task = changedTask.task;
+                t.initialDate = changedTask.initialDate;
+                t.initialHour = changedTask.initialHour;
+                t.finishDate = changedTask.finishDate;
+                t.finishHour = changedTask.finishHour;
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+                alert("Tarefa alterada com sucesso!");
+                location.reload();
+            }
+        } else alert('Data Inválida!');
+    })
+}
+
+function removeTask() {
+    const tasks = localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks")) : [];
+    const taskID = document.querySelector('#label-task').innerHTML.split(' ')[1][0];
+    const filteredTasks = tasks.filter(t => t.id != taskID);
+
+    localStorage.setItem("tasks", JSON.stringify(filteredTasks));
+    alert("Tarefa removida!");
+    location.reload();
+}
+
+function changeStatus(){
+    const tasks = localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks")) : [];
+    const taskID = document.querySelector('#label-task').innerHTML.split(' ')[1][0];
+
+    tasks.forEach(t => { if(t.id == taskID) t.status = !t.status; });
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    location.reload();
 }
 
 const headerTitle = document.querySelector('.header-title');
 headerTitle.innerText = `Bem Vindo, ${JSON.parse(localStorage.getItem("user")).name}`;
-
 
 if (localStorage.getItem("tasks")) {
     let tasks = JSON.parse(localStorage.getItem("tasks"));
@@ -101,23 +80,13 @@ if (localStorage.getItem("tasks")) {
 
     tasks.forEach((t) => {
         const tr = document.createElement('tr');
-        // tr.innerHTML = `
-        // <td onclick="${infoModal(t)}" class="td-task p-2" data-bs-toggle="modal" data-bs-target="#info-task-modal">${t.task}</td>
-        // <td>${formatData(t.initialDate)} às ${t.initialHour}</td>
-        // <td>${formatData(t.finishDate)} às ${t.finishHour}</td>
-        // <td>${taskStatus(t)}</td>
-        // <td>
-        //     <button onclick="${changeModal(t)}" id="task-${i}" class="btn btn-warning p-1 rounded" data-task="${t.task}" data-bs-target="#change-task-modal" data-bs-toggle="modal">
-        //         Alterar
-        //     </button>
-        // </td>
-        // `;
         const tdtask = document.createElement('td');
         const tdinitial = document.createElement('td');
         const tdfinish = document.createElement('td');
         var tdstatus = document.createElement('td');
         const tdchange = document.createElement('td');
 
+        tr.classList.add('tr-tasks');
         tdinitial.innerText = `${formatData(t.initialDate)} às ${t.initialHour}`;
         tdfinish.innerText = `${formatData(t.finishDate)} às ${t.finishHour}`;
         tdtask.innerText = `${t.task}`;
@@ -129,7 +98,7 @@ if (localStorage.getItem("tasks")) {
 
         const btnchange = document.createElement('button');
         btnchange.innerText = 'Alterar';
-        btnchange.classList.add('btn', 'btn-warning', 'p-1', 'rounded', '#teste');
+        btnchange.classList.add('btn', 'btn-warning', 'p-1', 'rounded');
         btnchange.setAttribute("data-bs-toggle", "modal");
         btnchange.setAttribute('data-bs-target', '#change-task-modal');
         btnchange.setAttribute('data-task', t.task);
@@ -145,7 +114,6 @@ if (localStorage.getItem("tasks")) {
         tr.appendChild(tdchange);
 
         tbody.appendChild(tr);
-        
     });
 }
 
@@ -160,6 +128,7 @@ function changeModal(task) {
     document.querySelector('#hi').value = task.initialHour;
     document.querySelector('#dt').value = task.finishDate;
     document.querySelector('#ht').value = task.finishHour;
+    document.querySelector('#label-task').innerHTML = `Tarefa ${task.id}:`;
 }
 
 function formatData(date) {
@@ -181,7 +150,7 @@ function taskStatus(task) {
     const start = new Date(`${task.initialDate}T${task.initialHour}:00`).getTime();
     const finish = new Date(`${task.finishDate}T${task.finishHour}:00`).getTime();
     const now = new Date().getTime();
-    if(!task.status){
+    if (!task.status) {
         if (finish < now) {
             tdstatus.innerHTML = status.ATRASO;
             tdstatus.setAttribute("style", "color: red");
@@ -193,18 +162,20 @@ function taskStatus(task) {
         else if (now < start) {
             tdstatus.innerHTML = status.PENDENTE;
             tdstatus.setAttribute("style", "color: yellow");
-        } else tdstatus.innerHTML = status.REALIZADA;
-    } else return status.REALIZADA;
+        }
+    } else{
+        tdstatus.innerHTML = status.REALIZADA;
+        tdstatus.setAttribute("style", "color: green");
+    }
 
     return tdstatus;
 }
 
-function checkDate(initialDate, initialHour, finishDate, finishHour) {
-    const start = new Date(`${initialDate}T${initialHour}:00`).getTime();
-    const finish = new Date(`${finishDate}T${finishHour}:00`).getTime();
-    const now = new Date().getTime();
+function checkDate(task) {
+    const start = new Date(`${task.initialDate}T${task.initialHour}:00`).getTime();
+    const finish = new Date(`${task.finishDate}T${task.finishHour}:00`).getTime();
 
-    if (finish < start) return false;
+    if (finish <= start) return false;
     else return true;
 }
 

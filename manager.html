@@ -87,7 +87,7 @@
                     <h1>Gerenciador de Tarefas</h1>
                     <div class="row p-2">
                         <div class="d-flex col-md-12">
-                            <label class="me-2">Tarefa:</label>
+                            <label id="label-task" class="me-2">Tarefa:</label>
                             <input type="text" class="form-control" id="nametask" required>
                         </div>
                         <div class="d-flex col-md-6 w-50">
@@ -108,10 +108,10 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center pb-4">
-                        <button class="m-2 btn btn-primary">Alterar Tarefa</button>
-                        <button class="m-2 btn btn-danger">Excluir Tarefa</button>
-                        <button class="m-2 btn btn-success" onclick="realizarTarefa()">Marcar como realizada</button>
-                        <button class="m-2 btn btn-secondary">Cancelar</button>
+                        <button class="m-2 btn btn-primary" onclick="changeTask()">Alterar Tarefa</button>
+                        <button class="m-2 btn btn-danger" onclick="removeTask()">Excluir Tarefa</button>
+                        <button class="m-2 btn btn-success" onclick="changeStatus()">Marcar como realizada</button>
+                        <button class="m-2 btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,10 @@
 table{
     background-color: #000;
 }
-.td-task:hover{
+.tr-tasks:hover{
     background-color: var(--bg-darkgreen);
+}
+.td-task:hover{
     cursor: pointer;
+    pointer-events: auto;
 }
